@@ -15,7 +15,7 @@ const ListItem: React.FC<ListItemProps> = ({ image, name, href }) => {
 
   const onClick = () => {
     // Add authentication before push
-    router.push(href);
+    router.push(href);  // When clicked, navigates to URL provided in 'href' (/liked)
   }
 
   return (
@@ -58,6 +58,7 @@ const ListItem: React.FC<ListItemProps> = ({ image, name, href }) => {
           hover:scale-110
         "
       >
+        {/** Only displays play icon when hovering over button */}
         <FaPlay className="text-black"/>
       </div>
     </button>
