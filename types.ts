@@ -1,5 +1,8 @@
 import Stripe from "stripe";
 
+// Structures and type-checks Stripe API objects
+
+// User information, includes optional billing information
 export interface UserDetails {
   id: string;
   first_name: string;
@@ -10,6 +13,7 @@ export interface UserDetails {
   payment_method?: Stripe.PaymentMethod[Stripe.PaymentMethod.Type];
 }
 
+// Properties related to purchasable products
 export interface Product {
   id: string;
   active?: boolean;
@@ -19,6 +23,7 @@ export interface Product {
   metadata?: Stripe.Metadata;
 }
 
+// Pricing information related to a product, includes different payment models
 export interface Price {
   id: string;
   product_id?: string;
@@ -34,6 +39,7 @@ export interface Price {
   products?: Product;
 }
 
+// Details a user's subscription model, also includes timestamps for different types of subscriptions
 export interface Subscription {
   id: string;
   user_id: string;
