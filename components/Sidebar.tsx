@@ -43,12 +43,12 @@ const Sidebar: React.FC<SidebarProps> = ({ children }) => {
         <Box>
           <div className="flex flex-col gap-y-4 px-5 py-4">
             {routes.map((item) => (
-              <SidebarItem key={item.label} {...item}></SidebarItem>
+              <SidebarItem key={item.label} {...item} />
             ))}
           </div>
         </Box>
         <Box className="overflow-y-auto h-full">
-          <Library></Library>
+          <Library /> 
         </Box>
       </div>
       <main className="h-full flex-1 overflow-y-auto py-2">

@@ -9,14 +9,14 @@ interface ModalProps {
   children: React.ReactNode;          // any child components or elements to be rendered inside the modal
 }
 
-const Modal: React.FC<ModalProps> = ( {isOpen, onChange, title, description, children}) => {
+const Modal: React.FC<ModalProps> = ({ isOpen, onChange, title, description, children }) => {
   return ( 
-    <Dialog.Root open={isOpen} defaultOpen={isOpen} onOpenChange={onChange}> {/** Main container, controls open state */}
-      <Dialog.Portal>                                                        {/** Ensures modal appears above other content */}
-        <Dialog.Overlay                                                        // Background overlay
+    <Dialog.Root open={isOpen} defaultOpen={isOpen} onOpenChange={onChange} > {/** Main container of dialog */} 
+      <Dialog.Portal>                                                         {/** Ensures modal appears above other content */}
+        <Dialog.Overlay                                                       
           className="bg-neutral-900/90 backdrop-blur-sm fixed inset-0"  
-        />
-        <Dialog.Content                                                        // Modal content, mobile and desktop friendly
+        />                                                                    {/** Background overlay, covers entire viewport */}
+        <Dialog.Content                                                        
           className="
             fixed 
             drop-shadow-md 
@@ -47,7 +47,7 @@ const Modal: React.FC<ModalProps> = ( {isOpen, onChange, title, description, chi
           <div>
             {children}
           </div>
-          <Dialog.Close asChild>                                {/** Button to close the modal */}
+          <Dialog.Close asChild> 
             <button
               className="
                 text-neutral-400
@@ -64,10 +64,10 @@ const Modal: React.FC<ModalProps> = ( {isOpen, onChange, title, description, chi
                 rounded-full
                 focus:outline-none
               "
-            >
+            >                                                                 {/** Button to close modal */}
               <IoMdClose />
             </button>
-          </Dialog.Close>
+          </Dialog.Close>                                                
         </Dialog.Content>
       </Dialog.Portal>
     </Dialog.Root>

@@ -15,7 +15,7 @@ interface SupabaseProviderProps{
 const SupabaseProvider: React.FC<SupabaseProviderProps> = ({ children }) => {
 
   // Initializes Supabase client. Client is tailored to database schema defined in Database type
-  const [supabaseClient] = useState( () => createClientComponentClient<Database>());
+  const [supabaseClient] = useState(() => createClientComponentClient<Database>());
 
   return (
     <SessionContextProvider supabaseClient={supabaseClient}>

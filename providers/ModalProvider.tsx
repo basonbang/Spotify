@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 
 import AuthModal from "@/components/AuthModal";
+import UploadModal from "@/components/UploadModal";
 
 // Conditionally render modals only after component is mounted on the client side.
 const ModalProvider = () => {
@@ -20,6 +21,7 @@ const ModalProvider = () => {
   return ( 
     <>
       <AuthModal />
+      <UploadModal />
     </>
    );
 }
