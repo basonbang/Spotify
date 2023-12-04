@@ -8,18 +8,20 @@ import { BiSearch } from 'react-icons/bi';
 import Box from "./Box";
 import SidebarItem from "./SidebarItem";
 import Library from "./Library";
+import { Song } from "@/types";
 
 
 // Defines shape of props that Sidebar expects.
 interface SidebarProps {
   children: React.ReactNode;  // Receive 'children' prop, which can be anything considered a valid React node. 
+  songs: Song[];
 }
 
 /* 
     Sidebar component: Is a React Functional Component which expects props that match the 'SidebarProps' interface
     Extracts 'children' prop directly from SidebarProps object passed to component 
 */
-const Sidebar: React.FC<SidebarProps> = ({ children }) => {
+const Sidebar: React.FC<SidebarProps> = ({ children, songs }) => {
 
   const pathname = usePathname();
   const routes = useMemo(() => [  // Memoizes an array of different route objects
@@ -48,7 +50,7 @@ const Sidebar: React.FC<SidebarProps> = ({ children }) => {
           </div>
         </Box>
         <Box className="overflow-y-auto h-full">
-          <Library /> 
+          <Library songs={songs}/> 
         </Box>
       </div>
       <main className="h-full flex-1 overflow-y-auto py-2">

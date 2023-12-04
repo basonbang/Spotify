@@ -2,6 +2,17 @@ import Stripe from "stripe";
 
 // Structures and type-checks Stripe API objects
 
+// Song information including paths to it's files
+export interface Song{
+  id: string;
+  user_id: string;
+  author: string;
+  title: string;
+  song_path: string;
+  image_path: string;
+};
+
+
 // User information, includes optional billing information
 export interface UserDetails {
   id: string;
