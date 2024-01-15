@@ -4,9 +4,14 @@ import { useEffect, useState } from "react";
 
 import AuthModal from "@/components/AuthModal";
 import UploadModal from "@/components/UploadModal";
+import SubscribeModal from "@/components/SubscribeModal";
+import { ProductsWithPrice } from "@/types";
 
+interface ModalProviderProps {
+  products: ProductsWithPrice[];
+}
 // Conditionally render modals only after component is mounted on the client side.
-const ModalProvider = () => {
+const ModalProvider: React.FC<ModalProviderProps> = ({ products }) => {
 
   const [isMounted, setIsMounted] = useState(false);  // Track whether the component has mounted on the client
 
@@ -22,6 +27,7 @@ const ModalProvider = () => {
     <>
       <AuthModal />
       <UploadModal />
+      <SubscribeModal products={products} />
     </>
    );
 }

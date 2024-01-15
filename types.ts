@@ -50,6 +50,10 @@ export interface Price {
   products?: Product;
 }
 
+export interface ProductsWithPrice extends Product{
+  prices?: Price[];
+}
+
 // Details a user's subscription model, also includes timestamps for different types of subscriptions
 export interface Subscription {
   id: string;
