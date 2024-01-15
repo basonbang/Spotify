@@ -1,5 +1,9 @@
+/*
+  Handles POST requests for creating Stripe checkout sessions
+*/
+
 import { createRouteHandlerClient } from "@supabase/auth-helpers-nextjs";
-import { headers, cookies } from "next/headers";
+import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
 
 import { stripe } from "@/libs/stripe";
@@ -10,7 +14,8 @@ export async function POST( request: Request) {
   const { price, quantity = 1, metadata = {} } = await request.json(); // extract post request data
 
   try {
-    const supabase = createRouteHandlerClient({cookies});
+    // Accesses authenticated user's current session and user details 
+    const supabase = createRouteHandlerClient({cookies}); 
     const { data: { user }} = await supabase.auth.getUser();
 
     const customer = await createOrRetrieveCustomer({
@@ -18,7 +23,7 @@ export async function POST( request: Request) {
       email: user?.email || ''
     });
 
-    // Create checkout session 
+    // Create Stripe checkout session 
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ["card"],
       billing_address_collection: 'required',
@@ -39,7 +44,7 @@ export async function POST( request: Request) {
       cancel_url: `${getURL()}`
     });
 
-    return NextResponse.json( { sessionId: session.id});
+    return NextResponse.json({ sessionId: session.id});  // JSON response containing session ID, indicating successful checkout
 
   } catch (error: any){
     console.log(error);

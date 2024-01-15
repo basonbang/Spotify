@@ -28,7 +28,7 @@ const SubscribeModal: React.FC<SubscribeModalProps> = ( { products }) => {
   
   const subscribeModal = useSubscribeModal();
   const { user, isLoading, subscription } = useUser();
-  const [priceIdLoading, setPriceIdLoading] = useState<string>();
+  const [priceIdLoading, setPriceIdLoading] = useState<string>(); // Tracks which price ID is currently being processed
 
   const onChange = (open: boolean) => {
     if (!open){
@@ -50,13 +50,14 @@ const SubscribeModal: React.FC<SubscribeModalProps> = ( { products }) => {
     }
 
     try {
+      // Create a checkout session and redirect to Stripe's checkout
       const { sessionId } = await postData({ 
         url: '/api/create-checkout-session',
         data: { price }
       });
-
       const stripe = await getStripe();
       stripe?.redirectToCheckout( { sessionId });
+      
     } catch (error) {
       toast.error((error as Error)?.message);
     } finally {
